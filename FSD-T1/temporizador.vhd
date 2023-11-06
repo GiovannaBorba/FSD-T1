@@ -2,40 +2,40 @@
 -- Temporizador decimal do cronometro de xadrez
 -- Fernando Moraes - 25/out/2023
 --------------------------------------------------------------------------------
-library IEEE;
-use ieee.std_logic_1164.all;
-library work;
+    library IEEE;
+    use ieee.std_logic_1164.all;
+    library work;
    ----------------------------------------------------------------------------------------------
-entity temporizador is
-    port( 
-          clock, reset, load, en : in std_logic;
-          init_time : in  std_logic_vector(7 downto 0);
-          cont      : out std_logic_vector(15 downto 0)
-      );
-end temporizador;
+    entity temporizador is
+        port( 
+            clock, reset, load, en : in std_logic;
+            init_time : in  std_logic_vector(7 downto 0);
+            cont      : out std_logic_vector(15 downto 0)
+        );
+    end temporizador;
    ----------------------------------------------------------------------------------------------
-architecture a1 of temporizador is
-    signal segL, segH, minL, minH : std_logic_vector(3 downto 0);
-    signal en_count0, en_count1, en_count2, en_count3, en1, en2, en3, en4: std_logic;
+    architecture a1 of temporizador is
+        signal segL, segH, minL, minH : std_logic_vector(3 downto 0);
+        signal en_count0, en_count1, en_count2, en_count3, en1, en2, en3, en4: std_logic;
 
    ----------------------------------------------------------------------------------------------
-begin
-    en_count0 <= '1' when (segL = "0000" and segH = "0000" and minL = "0000" and minH = "0000") else
+    begin
+        en_count0 <= '1' when (segL = "0000" and segH = "0000" and minL = "0000" and minH = "0000") else
                  '0';
 
-    en_count1 <= '1' when (segL = "0000") else
+        en_count1 <= '1' when (segL = "0000") else
                  '0';      
 
-    en_count2 <= '1' when (segH = "0000") else
+        en_count2 <= '1' when (segH = "0000") else
                  '0';
 
-    en_count3 <= '1' when (minL = "0000") else
+        en_count3 <= '1' when (minL = "0000") else
                  '0';
 
-    en1 <= en and not en_count0;
-    en2 <= en1 and en_count1;
-    en3 <= en2 and en_count2;
-    en4 <= en3 and en_count3;
+        en1 <= en and not en_count0;
+        en2 <= en1 and en_count1;
+        en3 <= en2 and en_count2;
+        en4 <= en3 and en_count3;
    ----------------------------------------------------------------------------------------------
    sL : entity work.dec_counter port map (
         first_value => x"0", limit => "1001",
@@ -79,5 +79,6 @@ begin
    cont <= minH & minL & segH & segL;
    ----------------------------------------------------------------------------------------------
 end a1;
+
 
 
