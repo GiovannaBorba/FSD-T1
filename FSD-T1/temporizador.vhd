@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 -- Temporizador decimal do cronometro de xadrez
--- Fernando Moraes - 25/out/2023
+-- Arthur Mazot, Giovanna Borba - 09/out/2023
 --------------------------------------------------------------------------------
     library IEEE;
     use ieee.std_logic_1164.all;
